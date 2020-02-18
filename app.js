@@ -50,10 +50,12 @@ class TodoListItem extends React.Component {
     super(props);
     this.state = {};
     this.state = {
+      ponder: false,
       done: false,
       todos: groceryItems
     };
   }
+  hover() {}
 
   // When a list item is clicked, we will toggle the `done`
   // boolean, and our component's `render` method will run again
@@ -63,17 +65,35 @@ class TodoListItem extends React.Component {
     });
   }
 
+  onMouseDown() {
+    this.setState(
+      {
+        ponder: !this.state.ponder
+      },
+      state => {
+        console.log("MOUSE STATE:", this.state);
+      }
+    );
+  }
+
+  // add hover functionality using this: https://reactjs.org/docs/handling-events.html
+  // consider onMouseEnter, onMouseLeave
+
   render() {
     // Making the style conditional on our `state` lets us
     // update it based on user interactions.
     var style = {
-      textDecoration: this.state.done ? "line-through" : "none"
+      textDecoration: this.state.done ? "line-through" : "none",
+      fontWeight: this.state.ponder ? "bold" : "normal"
     };
 
-    // You can pass inline styles using React's `style` attribute to any component
-    // snake-cased css properties become camelCased this this object
     return (
-      <li style={style} onClick={this.onListItemClick.bind(this)}>
+      <li
+        style={style}
+        onClick={this.onListItemClick.bind(this)}
+        onMouseOver={this.onMouseDown.bind(this)}
+        onMouseLeave={this.onMouseDown.bind(this)}
+      >
         {this.props.todo}
       </li>
     );
