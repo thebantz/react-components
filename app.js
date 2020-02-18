@@ -20,16 +20,16 @@
 //   </div>
 // );
 
-class TodoListItem extends React.Component {
-  constructor(props) {
-    super(props);
-    // this.state = {}
-    // this.state.todos = ["Cucumbers", "Tomato", "Greek Yoghurt"];
-  }
-  render() {
-    return <li>{this.props.todo}</li>;
-  }
-}
+// class TodoListItem extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     // this.state = {}
+//     // this.state.todos = ["Cucumbers", "Tomato", "Greek Yoghurt"];
+//   }
+//   render() {
+//     return <li>{this.props.todo}</li>;
+//   }
+// }
 
 var groceryItems = ["Cucumbers", "Tomato", "Greek Yoghurt"];
 // // Update our `TodoList` to use the new `TodoListItem` component
@@ -45,40 +45,39 @@ var TodoList = props => (
   </div>
 );
 
-// class TodoListItem extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {};
-//     // this.state.
-//     this.state = {
-//       done: false,
-//       todos: ["Cucumbers", "Tomato", "Greek Yoghurt"]
-//     };
-//   }
+class TodoListItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.state = {
+      done: false,
+      todos: groceryItems
+    };
+  }
 
-//   // When a list item is clicked, we will toggle the `done`
-//   // boolean, and our component's `render` method will run again
-//   onListItemClick() {
-//     this.setState({
-//       done: !this.state.done
-//     });
-//   }
+  // When a list item is clicked, we will toggle the `done`
+  // boolean, and our component's `render` method will run again
+  onListItemClick() {
+    this.setState({
+      done: !this.state.done
+    });
+  }
 
-//   render() {
-//     // Making the style conditional on our `state` lets us
-//     // update it based on user interactions.
-//     var style = {
-//       textDecoration: this.state.done ? "line-through" : "none"
-//     };
+  render() {
+    // Making the style conditional on our `state` lets us
+    // update it based on user interactions.
+    var style = {
+      textDecoration: this.state.done ? "line-through" : "none"
+    };
 
-//     // You can pass inline styles using React's `style` attribute to any component
-//     // snake-cased css properties become camelCased this this object
-//     return (
-//       <li style={style} onClick={this.onListItemClick.bind(this)}>
-//         {this.props.todo}
-//       </li>
-//     );
-//   }
-// }
+    // You can pass inline styles using React's `style` attribute to any component
+    // snake-cased css properties become camelCased this this object
+    return (
+      <li style={style} onClick={this.onListItemClick.bind(this)}>
+        {this.props.todo}
+      </li>
+    );
+  }
+}
 
 ReactDOM.render(<TodoList />, document.getElementById("app"));
